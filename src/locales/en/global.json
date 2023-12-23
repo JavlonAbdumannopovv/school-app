@@ -1,0 +1,20 @@
+{
+  "admin": "Admin",
+  "oqituvchi": "Teacher",
+  "oquvchi": "Student",
+  "sinflar": "Classes",
+  "oqituvchilar": "Teachers",
+  "oquvchilar": "Students",
+  "fanlar": "Subjects",
+  "dars_jadvali": "Class Schedule",
+  "jurnal": "Journal",
+  "kpi": "KPI",
+  "chiqish": "Logout",
+  "qidirish": "Search",
+  "sinf_nomlari": "Class Names",
+  "oquvchi_soni": "Number of Students",
+  "guruh": "Group",
+  "sinf_rahbar": "Class Leader",
+  "sinf_qoshish": "Add Class",
+  "jami": "Total: "
+}

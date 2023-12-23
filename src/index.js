@@ -1,13 +1,16 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import App from "./App";
 import { theme } from "./config/theme.config";
 import { ChakraProvider } from "@chakra-ui/react";
 import "./styles/index.css";
+import { I18nextProvider } from "react-i18next";
+import i18n from "./i18n";
 
-ReactDOM.render(
+createRoot(document.getElementById("root")).render(
   <ChakraProvider theme={theme}>
-    <App />
-  </ChakraProvider>,
-  document.getElementById("root")
+    <I18nextProvider i18n={i18n}>
+      <App />
+    </I18nextProvider>
+  </ChakraProvider>
 );

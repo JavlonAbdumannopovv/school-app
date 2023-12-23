@@ -1,0 +1,20 @@
+{
+  "admin": "Админ",
+  "oqituvchi": "Учитель",
+  "oquvchi": "Студент",
+  "sinflar": "Классы",
+  "oqituvchilar": "Учителя",
+  "oquvchilar": "Студенты",
+  "fanlar": "Предметы",
+  "dars_jadvali": "Расписание занятий",
+  "jurnal": "Журнал",
+  "kpi": "КПИ",
+  "chiqish": "Выйти",
+  "qidirish": "Поиск",
+  "sinf_nomlari": "Названия классов",
+  "oquvchi_soni": "Количество студентов",
+  "guruh": "Группа",
+  "sinf_rahbar": "Классный руководитель",
+  "sinf_qoshish": "Добавить класс",
+  "jami": "Всего: "
+}

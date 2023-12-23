@@ -4,9 +4,19 @@ body {
     "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #172833 !important;
+  /* background-color: #172833 !important; */
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+.sidebar_btn {
+  background: "#0094FF";
+  color: "#fff";
+}
+
+.sidebar_btn:hover {
+  background: "red";
+  color: "#fff";
 }
