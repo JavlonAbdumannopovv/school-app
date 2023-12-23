@@ -13,7 +13,7 @@ import {
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { IoChevronBackSharp } from "react-icons/io5";
 import { colors } from "../../config/colors";
 import { IoSearch } from "react-icons/io5";
@@ -22,6 +22,8 @@ import { BsFillMoonFill, BsFillSunFill } from "react-icons/bs";
 import { BiChevronDown } from "react-icons/bi";
 import UzbIcons from "../../icons/uzb";
 import { useTranslation } from "react-i18next";
+import EngIcons from "../../icons/eng";
+import RusIcon from "../../icons/rus";
 
 const Header = ({ title, backIcon = true }) => {
   const base = useColorModeValue(colors.base.light, colors.base.dark);
@@ -46,6 +48,7 @@ const Header = ({ title, backIcon = true }) => {
       p={3}
       px={5}
       justifyContent={"space-between"}
+      boxShadow={"lg"}
     >
       <HStack cursor={"pointer"}>
         {backIcon && <Icon as={IoChevronBackSharp} />}
@@ -81,7 +84,15 @@ const Header = ({ title, backIcon = true }) => {
             variant={"ghost"}
             display={{ base: "none", md: "block" }}
           >
-            <Icon as={UzbIcons} w={10} h={10} mb={2} />
+            {i18n.resolvedLanguage === "uz" && (
+              <Icon as={UzbIcons} w={10} h={10} mb={2} />
+            )}
+            {i18n.resolvedLanguage === "ru" && (
+              <Icon as={RusIcon} w={10} h={10} mb={2} />
+            )}
+            {i18n.resolvedLanguage === "en" && (
+              <Icon as={EngIcons} w={10} h={10} mb={2} />
+            )}
             <Icon as={BiChevronDown} w={7} h={7} pos={"relative"} top={1} />
           </MenuButton>
           <MenuList p={0}>

@@ -77,6 +77,22 @@ const AdminSidebar = () => {
           );
         })}
       </Stack>
+      <Stack w={"full"} position={"absolute"} bottom={0} left={0} py={5}>
+        <Divider />
+        <Link href="/">
+          <HStack
+            w={"fit-content"}
+            transition={"all .3s"}
+            gap={2}
+            ml={5}
+            mt={5}
+            _hover={{ color: "blue.500" }}
+          >
+            <Icon as={FiLogOut} />
+            <Text>Chiqish</Text>
+          </HStack>
+        </Link>
+      </Stack>
     </Stack>
   );
 };

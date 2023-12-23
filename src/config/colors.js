@@ -15,6 +15,14 @@ export const colors = {
     dark: "telegram",
     light: "telegram",
   },
+  tableHead: {
+    dark: "#3a4b56",
+    light: "#e6eef4",
+  },
+  border: {
+    dark: "gray.700",
+    light: "gray.200",
+  },
   btn: {
     active: { background: "#0094FF", color: "#fff" },
     nonactive: { background: "transparent", color: "#fff" },

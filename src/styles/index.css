@@ -20,3 +20,7 @@ code {
   background: "red";
   color: "#fff";
 }
+
+a {
+  text-decoration: none !important;
+}
