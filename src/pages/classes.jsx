@@ -19,11 +19,11 @@ import { BiPlus } from "react-icons/bi";
 import { useTranslation } from "react-i18next";
 import { TbNumber } from "react-icons/tb";
 import { HiDotsHorizontal } from "react-icons/hi";
-import { sinflar } from "../config/data";
-import TableField from "../components/tables/table-field";
-import { Link } from "react-router-dom";
+import useClass from "../store/classes.store";
+import { TableFieldClasses } from "../components";
 
 const Classes = () => {
+  const { classes } = useClass();
   const { t } = useTranslation();
   const tableHead = useColorModeValue(
     colors.tableHead.light,
@@ -46,8 +46,8 @@ const Classes = () => {
           {t("sinf_qoshish")}
         </Button>
       </HStack>
-      <TableContainer boxShadow={"lg"} bg={secondary}>
-        <Table size={"sm"} border={"1px"} borderColor={border}>
+      <TableContainer boxShadow={"lg"} bg={secondary} borderRadius={"xl"}>
+        <Table size={"md"} border={"1px"} borderColor={border}>
           <Thead bg={tableHead} h={16}>
             <Tr>
               <Th>
@@ -63,17 +63,8 @@ const Classes = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {sinflar.map((item, i) => (
-              <TableField
-                td1={i + 1}
-                td2={item.sinf}
-                td3={item.oquvchi_soni}
-                td4={item.guruh}
-                td5={item.sinf_rahbar}
-                warning={false}
-                del={false}
-                edit={true}
-              />
+            {classes.map((item, i) => (
+              <TableFieldClasses ind={i + 1} clas={item} />
             ))}
           </Tbody>
         </Table>

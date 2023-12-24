@@ -4,7 +4,7 @@ import { PiWarningOctagonLight } from "react-icons/pi";
 import { MdOutlineEdit } from "react-icons/md";
 import { MdOutlineDelete } from "react-icons/md";
 
-const Actions = ({ warning = true, del = true, edit = true }) => {
+const Actions = ({ warning = true, del = true, edit = true, delAction }) => {
   const { colorMode } = useColorMode();
   return (
     <HStack>
@@ -19,7 +19,13 @@ const Actions = ({ warning = true, del = true, edit = true }) => {
         </Button>
       )}
       {del && (
-        <Button colorScheme="red" w={7} h={10} borderRadius={"full"}>
+        <Button
+          colorScheme="red"
+          w={7}
+          h={10}
+          borderRadius={"full"}
+          onClick={delAction}
+        >
           <Icon
             as={MdOutlineDelete}
             fill={colorMode === "dark" ? "red.700" : "white"}

@@ -13,7 +13,7 @@ import {
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { IoChevronBackSharp } from "react-icons/io5";
 import { colors } from "../../config/colors";
 import { IoSearch } from "react-icons/io5";
