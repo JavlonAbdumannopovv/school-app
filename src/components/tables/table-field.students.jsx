@@ -4,6 +4,9 @@ import {
   useColorModeValue,
   useDisclosure,
   useToast,
+  Avatar,
+  Text,
+  HStack,
 } from "@chakra-ui/react";
 import Actions from "../actions/actions";
 import { colors } from "../../config/colors";
@@ -13,7 +16,8 @@ import useClass from "../../store/classes.store";
 const TableFieldStudents = ({ ind, student }) => {
   const base = useColorModeValue(colors.base.light, colors.base.dark);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { removeStudent } = useClass();
+  const { removeStudent, students, setStudentInfo, studentInfoOpenToggler } =
+    useClass();
   const toast = useToast();
 
   const deleteStudent = () => {
@@ -27,6 +31,9 @@ const TableFieldStudents = ({ ind, student }) => {
       position: "top-right",
     });
   };
+
+  const avatar = students.find((c) => c.id === student.id);
+
   return (
     <>
       <Tr
@@ -35,11 +42,18 @@ const TableFieldStudents = ({ ind, student }) => {
         cursor={"pointer"}
         _hover={{ background: base }}
         transition={"all .3s ease"}
+        onClick={() => {
+          setStudentInfo(student.id);
+          studentInfoOpenToggler(true);
+        }}
       >
         <Td>{ind}</Td>
         <Td>
-          {student.ism}
-          {student.familiya}
+          <HStack>
+            <Avatar w={10} h={10} src={avatar && avatar.img} />
+            <Text>{student.ism}</Text>
+            <Text>{student.familiya}</Text>
+          </HStack>
         </Td>
         <Td>{student.telefon}</Td>
         <Td>{student.hisob_holati}</Td>

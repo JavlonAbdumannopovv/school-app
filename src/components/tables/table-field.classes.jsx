@@ -1,5 +1,8 @@
 import {
+  Avatar,
+  HStack,
   Td,
+  Text,
   Tr,
   useColorModeValue,
   useDisclosure,
@@ -9,14 +12,19 @@ import Actions from "../actions/actions";
 import { colors } from "../../config/colors";
 import ClassDetailedModal from "../modal/class-detailed.modal";
 import useClass from "../../store/classes.store";
-// import { unstable_HistoryRouter } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const TableFieldClasses = ({ ind, clas }) => {
   const base = useColorModeValue(colors.base.light, colors.base.dark);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { removeClass } = useClass();
+  const { removeClass, teachers } = useClass();
   const toast = useToast();
-  // const history = unstable_HistoryRouter();
+  const navigate = useNavigate();
+  const avatar = teachers.find(
+    (c) => `${c.ism} ${c.familiya}` === clas.sinf_rahbar
+  );
+
+  if (avatar !== "undefined") console.log(avatar);
 
   const deleteStudent = () => {
     removeClass(clas.id);
@@ -37,13 +45,18 @@ const TableFieldClasses = ({ ind, clas }) => {
         cursor={"pointer"}
         _hover={{ background: base }}
         transition={"all .3s ease"}
-        // onClick={() => history.push(`/sinflar/sinf-malumotlari:id=${clas.id}`)}
+        onClick={() => navigate(`/sinflar/sinf-malumotlari:${clas.sinf}`)}
       >
         <Td>{ind}</Td>
         <Td>{clas.sinf}-sinf</Td>
         <Td>{clas.oquvchi_soni}</Td>
         <Td>{clas.guruh}</Td>
-        <Td>{clas.sinf_rahbar}</Td>
+        <Td>
+          <HStack>
+            <Avatar src={avatar && avatar.img} w={10} h={10} />
+            <Text>{clas.sinf_rahbar}</Text>
+          </HStack>
+        </Td>
         <Td>
           <Actions warning={true} del={true} edit={true} delAction={onOpen} />
         </Td>

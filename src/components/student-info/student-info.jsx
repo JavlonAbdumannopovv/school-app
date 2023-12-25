@@ -1,10 +1,10 @@
 import {
+  Avatar,
   Divider,
   Grid,
   HStack,
   Heading,
   IconButton,
-  Image,
   Stack,
   Text,
   useColorModeValue,
@@ -14,8 +14,10 @@ import { FiPhone } from "react-icons/fi";
 import { MdOutlineEmail } from "react-icons/md";
 import { colors } from "../../config/colors";
 import BoxTitle from "../box-title/box-title";
+import useClass from "../../store/classes.store";
 
-const StudentInfo = ({ item }) => {
+const StudentInfo = () => {
+  const { studentInfo, studentInfoOpenToggler, studentInfoOpen } = useClass();
   const secondary = useColorModeValue(
     colors.secondary.light,
     colors.secondary.dark
@@ -25,12 +27,11 @@ const StudentInfo = ({ item }) => {
     colors.colorScheme.dark
   );
   const gray = useColorModeValue(colors.border.dark, colors.border.light);
-  const closeHandler = () => {};
   return (
     <Stack
       position={"fixed"}
       top={0}
-      right={"-440px"}
+      right={studentInfoOpen ? 0 : "-440px"}
       pt={20}
       px={10}
       pb={10}
@@ -43,6 +44,7 @@ const StudentInfo = ({ item }) => {
       borderEndRadius={"0"}
       minH={"100vh"}
       zIndex={1001}
+      transition={"all .5s ease"}
     >
       <IconButton
         icon={<MdClose fontSize={30} color={gray} />}
@@ -51,22 +53,15 @@ const StudentInfo = ({ item }) => {
         position={"absolute"}
         top={5}
         right={5}
-        onClick={closeHandler}
+        onClick={() => studentInfoOpenToggler(false)}
       />
-      <Image
-        src={
-          "https://thumbs.img-sprzedajemy.pl/1000x901c/33/16/4a/portret-karykatura-portret-slubny-malowanie-mazowieckie-warszawa-490227530.jpg"
-        }
-        w={"132px"}
-        h={"132px"}
-        borderRadius={"full"}
-      />
+      <Avatar src={studentInfo.img} w={"132px"} h={"132px"} />
       <Heading color={`${colorScheme}.500`}>
-        {item.ism} {item.familiya}
+        {studentInfo.ism} {studentInfo.familiya}
       </Heading>
-      <Text color={"gray"}>ID: {item.id}</Text>
+      <Text color={"gray"}>ID: {studentInfo.id}</Text>
       <HStack w={"full"} justifyContent={"space-between"}>
-        <HStack overflowX={"hidden"} w={"45%"}>
+        <HStack overflowX={"hidden"} w={"50%"}>
           <IconButton
             icon={<FiPhone fontSize={15} />}
             borderRadius={"full"}
@@ -74,7 +69,7 @@ const StudentInfo = ({ item }) => {
             variant={"outline"}
           />
           <Text color={gray} fontSize={15}>
-            {item.telefon}
+            {studentInfo.telefon}
           </Text>
         </HStack>
         <HStack overflowX={"hidden"}>
@@ -85,21 +80,24 @@ const StudentInfo = ({ item }) => {
             variant={"outline"}
           />
           <Text color={gray} fontSize={15}>
-            {item.email}
+            {studentInfo.email}
           </Text>
         </HStack>
       </HStack>
       <Divider />
-      <BoxTitle title={"About"} subtitle={item.about} />
+      <BoxTitle title={"About"} subtitle={studentInfo.about} />
       <Grid gridTemplateColumns={"repeat(2, 1fr)"} gap={2} rowGap={5}>
-        <BoxTitle title={"Tug`ilgan sana"} subtitle={item.tugilgan_sana} />
-        <BoxTitle title={"Username"} subtitle={item.username} />
-        <BoxTitle title={"Jinsi"} subtitle={item.gender} />
-        <BoxTitle title={"Parol"} subtitle={item.parol} />
-        <BoxTitle title={"Manzil"} subtitle={item.manzil} />
+        <BoxTitle
+          title={"Tug`ilgan sana"}
+          subtitle={studentInfo.tugilgan_sana}
+        />
+        <BoxTitle title={"Username"} subtitle={studentInfo.username} />
+        <BoxTitle title={"Jinsi"} subtitle={studentInfo.gender} />
+        <BoxTitle title={"Parol"} subtitle={studentInfo.parol} />
+        <BoxTitle title={"Manzil"} subtitle={studentInfo.manzil} />
         <BoxTitle
           title={"O`qish summasi"}
-          subtitle={`UZS ${item.hisob_holati}`}
+          subtitle={`UZS ${studentInfo.hisob_holati}`}
         />
       </Grid>
     </Stack>

@@ -12,6 +12,7 @@ import {
   useColorModeValue,
   Tbody,
   TableContainer,
+  Link,
 } from "@chakra-ui/react";
 import Header from "../layouts/header/header";
 import { colors } from "../config/colors";
@@ -38,13 +39,15 @@ const Classes = () => {
     <Stack spacing={5}>
       <Header title="sinflar" backIcon={false} />
       <HStack justifyContent={"flex-end"}>
-        <Button
-          colorScheme={colors.colorScheme.dark}
-          leftIcon={<BiPlus />}
-          borderRadius={"full"}
-        >
-          {t("sinf_qoshish")}
-        </Button>
+        <Link href="/sinflar/sinf-qoshish">
+          <Button
+            colorScheme={colors.colorScheme.dark}
+            leftIcon={<BiPlus />}
+            borderRadius={"full"}
+          >
+            {t("sinf_qoshish")}
+          </Button>
+        </Link>
       </HStack>
       <TableContainer boxShadow={"lg"} bg={secondary} borderRadius={"xl"}>
         <Table size={"md"} border={"1px"} borderColor={border}>
@@ -64,7 +67,7 @@ const Classes = () => {
           </Thead>
           <Tbody>
             {classes.map((item, i) => (
-              <TableFieldClasses ind={i + 1} clas={item} />
+              <TableFieldClasses key={i} ind={i + 1} clas={item} />
             ))}
           </Tbody>
         </Table>

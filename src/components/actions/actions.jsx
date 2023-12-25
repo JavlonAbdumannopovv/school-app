@@ -9,7 +9,13 @@ const Actions = ({ warning = true, del = true, edit = true, delAction }) => {
   return (
     <HStack>
       {warning && (
-        <Button colorScheme="yellow" w={7} h={10} borderRadius={"full"}>
+        <Button
+          colorScheme="yellow"
+          w={7}
+          h={10}
+          borderRadius={"full"}
+          zIndex={1000}
+        >
           <Icon
             as={PiWarningOctagonLight}
             fill={colorMode === "dark" ? "yellow.700" : "white"}
@@ -25,6 +31,7 @@ const Actions = ({ warning = true, del = true, edit = true, delAction }) => {
           h={10}
           borderRadius={"full"}
           onClick={delAction}
+          zIndex={1000}
         >
           <Icon
             as={MdOutlineDelete}
@@ -35,7 +42,13 @@ const Actions = ({ warning = true, del = true, edit = true, delAction }) => {
         </Button>
       )}
       {edit && (
-        <Button colorScheme="blue" w={7} h={10} borderRadius={"full"}>
+        <Button
+          colorScheme="blue"
+          w={7}
+          h={10}
+          borderRadius={"full"}
+          zIndex={1000}
+        >
           <Icon
             as={MdOutlineEdit}
             fill={colorMode === "dark" ? "blue.700" : "white"}

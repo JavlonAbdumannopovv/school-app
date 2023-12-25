@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { adminLayout } from "../layouts/admin/admin-layout";
 import {
   Avatar,
@@ -23,7 +22,6 @@ import {
 import Header from "../layouts/header/header";
 import { TbNumber } from "react-icons/tb";
 import { HiDotsHorizontal } from "react-icons/hi";
-import { talabalar } from "../config/data";
 import { colors } from "../config/colors";
 import useClass from "../store/classes.store";
 import {
@@ -31,10 +29,11 @@ import {
   ClassDetailedModal,
   StudentInfo,
 } from "../components";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ClassesDetailed = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { students, removeClass } = useClass();
+  const { students, removeClass, classes, teachers } = useClass();
   const toast = useToast();
   const tableHead = useColorModeValue(
     colors.tableHead.light,
@@ -46,10 +45,19 @@ const ClassesDetailed = () => {
     colors.secondary.dark
   );
 
+  const { id } = useParams();
+  const currentClass = classes.find((c) => `sinf-malumotlari:${c.sinf}` === id);
+  const navigate = useNavigate();
+  const avatar = teachers.find(
+    (c) => `${c.ism} ${c.familiya}` === currentClass.sinf_rahbar
+  );
+
   const deleteClass = () => {
+    removeClass(currentClass.id);
+    navigate("/sinflar/");
     onClose();
     toast({
-      title: '8"A"-sinf muvaffaqqiyatli o`chirildi!',
+      title: `${currentClass.sinf}-sinf muvaffaqqiyatli o'chirildi`,
       status: "info",
       duration: 9000,
       isClosable: true,
@@ -63,11 +71,11 @@ const ClassesDetailed = () => {
       <Stack gap={5}>
         <HStack alignItems={"flex-start"} justifyContent={"space-between"}>
           <Stack gap={10} pl={10}>
-            <Heading>8"A"-sinf</Heading>
+            <Heading>{currentClass.sinf}-sinf</Heading>
             <HStack alignItems={"flex-start"}>
-              <Avatar w={"100px"} h={"100px"} />
+              <Avatar src={avatar && avatar.img} w={"100px"} h={"100px"} />
               <Box mt={2}>
-                <Text fontWeight={"bold"}>Muhammadrasul Olimov</Text>
+                <Text fontWeight={"bold"}>{currentClass.sinf_rahbar}</Text>
                 <Text color={"gray"}>Kurator</Text>
               </Box>
             </HStack>
@@ -91,11 +99,11 @@ const ClassesDetailed = () => {
         <Stack pl={10}>
           <HStack>
             <Text fontWeight={"bold"}>Tashkil qilindi: </Text>
-            <Text>15.09.2022</Text>
+            <Text>{currentClass.tashkil_qilindi}</Text>
           </HStack>
           <HStack>
             <Text fontWeight={"bold"}>Jami o`quvchi: </Text>
-            <Text>20</Text>
+            <Text>{currentClass.oquvchi_soni}</Text>
           </HStack>
         </Stack>
       </Stack>
@@ -117,7 +125,7 @@ const ClassesDetailed = () => {
           </Thead>
           <Tbody>
             {students.map((student, i) => (
-              <TableFieldStudents ind={i + 1} student={student} />
+              <TableFieldStudents key={i} ind={i + 1} student={student} />
             ))}
           </Tbody>
         </Table>
@@ -129,7 +137,7 @@ const ClassesDetailed = () => {
         btnAction={deleteClass}
       />
 
-      <StudentInfo item={talabalar[0]} />
+      <StudentInfo />
     </Stack>
   );
 };

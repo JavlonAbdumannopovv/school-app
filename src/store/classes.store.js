@@ -4,6 +4,8 @@ import { sinflar, talabalar } from "../config/data";
 const useClass = create((set) => ({
   classes: [...sinflar],
   students: [...talabalar],
+  studentInfo: { ...talabalar[0] },
+  studentInfoOpen: false,
   currentClass: { ...sinflar[0] },
   addClass: (clas) =>
     set((state) => ({
@@ -20,6 +22,14 @@ const useClass = create((set) => ({
   setCurrentClass: (classId) =>
     set((state) => ({
       currentClass: state.classes.find((clas) => clas.id !== classId),
+    })),
+  setStudentInfo: (studentId) =>
+    set((state) => ({
+      studentInfo: state.students.find((student) => student.id === studentId),
+    })),
+  studentInfoOpenToggler: (bool) =>
+    set(() => ({
+      studentInfoOpen: bool,
     })),
 }));
 
