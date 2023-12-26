@@ -13,7 +13,7 @@ export const images = [
 ];
 export class Fan {
   constructor(nomi, turi) {
-    this.id = Math.floor(Math.random() * 900000) + 100;
+    this.id = `${Math.floor(Math.random() * 900000) + 100}`;
     this.nomi = nomi;
     this.turi = turi;
   }
@@ -21,7 +21,7 @@ export class Fan {
 
 export class Teacher {
   constructor(ism, familiya, fan, img) {
-    this.id = Math.floor(Math.random() * 900000) + 100;
+    this.id = `${Math.floor(Math.random() * 900000) + 100}`;
     this.ism = ism;
     this.familiya = familiya;
     this.fan = fan;
@@ -56,21 +56,8 @@ export const fanlar = [
   new Fan("Fizika", "Aniq fan"),
   new Fan("Biologiya", "Tabiiy fan"),
 ];
-class Sinf {
-  constructor(sinf, oquvchi_soni, guruh, sinf_rahbar, tashkil_qilindi) {
-    this.id = `${Math.floor(Math.random() * 900000) + 100}`;
-    this.sinf = sinf;
-    this.oquvchi_soni = oquvchi_soni;
-    this.guruh = guruh;
-    this.sinf_rahbar = sinf_rahbar;
-    this.tashkil_qilindi = tashkil_qilindi;
-    this.fanlar = fanlar.map((item, i) => {
-      return { fanId: item.id, oqituvchiId: oqituvchilar[i].id };
-    });
-  }
-}
 
-class Talaba {
+export class Talaba {
   constructor(ism, familiya, telefon, sinf, grantlar, gender, img) {
     this.ism = ism;
     this.familiya = familiya;
@@ -97,21 +84,7 @@ class Talaba {
   }
 }
 
-export const sinflar = [
-  new Sinf('8"A"', 30, "Matematika", "Ali Abdurahimov", "2022-09-01"),
-  new Sinf('8"B"', 25, "Ona tili", "Nigora Karimova", "2022-09-01"),
-  new Sinf('8"V"', 28, "Fizika", "Bobur Hasanov", "2022-09-01"),
-  new Sinf('8"D"', 22, "Informatika", "Dilnoza Mirzayeva", "2022-09-01"),
-  new Sinf('9"A"', 20, "Tarix", "Rustam Qosimov", "2022-09-01"),
-  new Sinf('9"B"', 18, "Biologiya", "Durdona Xudoyberdiyeva", "2022-09-01"),
-  new Sinf('9"V"', 15, "Kimyo", "Jamshid Olimov", "2022-09-01"),
-  new Sinf('9"D"', 12, "Ingliz tili", "Susan Smith", "2022-09-01"),
-  new Sinf('10"A"', 10, "Musiqiy", "Shahzoda Mahmudova", "2022-09-01"),
-  new Sinf('10"B"', 8, "San'at", "Jamol Kamolov", "2022-09-01"),
-];
-
 export const talabalar = [
-  new Talaba("John", "Doe", "123-456-7890", "10th grade", 500, "male", "0"),
   new Talaba("Jane", "Smith", "987-654-3210", "11th grade", 0, "female", "1"),
   new Talaba("Alex", "Johnson", "555-123-4567", "9th grade", 300, "male", "2"),
   new Talaba(
@@ -133,6 +106,7 @@ export const talabalar = [
     "female",
     "5"
   ),
+  new Talaba("John", "Doe", "123-456-7890", "10th grade", 500, "male", "0"),
   new Talaba("Daniel", "Jones", "666-777-8888", "11th grade", 400, "male", "6"),
   new Talaba("Olivia", "Davis", "999-000-1111", "12th grade", 0, "female", "7"),
   new Talaba(
@@ -195,4 +169,33 @@ export const talabalar = [
   ),
   new Talaba("Sardor", "Ahmedov", "222-333-4444", "10-sinf", 600, "male", "7"),
   new Talaba("Dilnoza", "Yunusova", "888-999-0000", "9-sinf", 0, "female", "8"),
+];
+
+class Sinf {
+  constructor(sinf, oquvchi_soni, guruh, sinf_rahbar, tashkil_qilindi) {
+    this.id = `${Math.floor(Math.random() * 900000) + 100}`;
+    this.sinf = sinf;
+    this.oquvchi_soni = oquvchi_soni;
+    this.guruh = guruh;
+    this.sinf_rahbar = sinf_rahbar;
+    this.tashkil_qilindi = tashkil_qilindi;
+    this.fanlar = fanlar.map((item, i) => {
+      return { fanId: item.id, oqituvchiId: oqituvchilar[i].id };
+    });
+    this.oquvchilar = talabalar.map((talaba) => talaba.id);
+    this.xona = "101";
+  }
+}
+
+export const sinflar = [
+  new Sinf('7"A"', 10, "N1", `${oqituvchilar[0].id}`, "2022-09-01"),
+  new Sinf('7"B"', 8, "N2", `${oqituvchilar[1].id}`, "2022-09-01"),
+  new Sinf('8"A"', 30, "N1", `${oqituvchilar[2].id}`, "2022-09-01"),
+  new Sinf('8"B"', 25, "N2", `${oqituvchilar[3].id}`, "2022-09-01"),
+  new Sinf('8"V"', 28, "N1", `${oqituvchilar[4].id}`, "2022-09-01"),
+  new Sinf('8"D"', 22, "N2", `${oqituvchilar[5].id}`, "2022-09-01"),
+  new Sinf('9"A"', 20, "N1", `${oqituvchilar[6].id}`, "2022-09-01"),
+  new Sinf('9"B"', 18, "N2", `${oqituvchilar[7].id}`, "2022-09-01"),
+  new Sinf('9"V"', 15, "N1", `${oqituvchilar[8].id}`, "2022-09-01"),
+  new Sinf('9"D"', 12, "N2", `${oqituvchilar[9].id}`, "2022-09-01"),
 ];

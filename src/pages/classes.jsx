@@ -66,7 +66,7 @@ const Classes = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {classes.map((item, i) => (
+            {classes.reverse().map((item, i) => (
               <TableFieldClasses key={i} ind={i + 1} clas={item} />
             ))}
           </Tbody>

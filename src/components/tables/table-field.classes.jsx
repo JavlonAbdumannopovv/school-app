@@ -20,11 +20,7 @@ const TableFieldClasses = ({ ind, clas }) => {
   const { removeClass, teachers } = useClass();
   const toast = useToast();
   const navigate = useNavigate();
-  const avatar = teachers.find(
-    (c) => `${c.ism} ${c.familiya}` === clas.sinf_rahbar
-  );
-
-  if (avatar !== "undefined") console.log(avatar);
+  const teacher = teachers.find((c) => `${c.id}` === clas.sinf_rahbar);
 
   const deleteStudent = () => {
     removeClass(clas.id);
@@ -37,6 +33,8 @@ const TableFieldClasses = ({ ind, clas }) => {
       position: "top-right",
     });
   };
+
+  console.log(teacher);
   return (
     <>
       <Tr
@@ -53,8 +51,8 @@ const TableFieldClasses = ({ ind, clas }) => {
         <Td>{clas.guruh}</Td>
         <Td>
           <HStack>
-            <Avatar src={avatar && avatar.img} w={10} h={10} />
-            <Text>{clas.sinf_rahbar}</Text>
+            <Avatar src={teacher && teacher.img} w={10} h={10} />
+            <Text>{teacher && `${teacher.ism} ${teacher.familiya}`}</Text>
           </HStack>
         </Td>
         <Td>

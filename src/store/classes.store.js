@@ -1,11 +1,13 @@
 import { create } from "zustand";
-import { sinflar, talabalar } from "../config/data";
+import { fanlar, oqituvchilar, sinflar, talabalar } from "../config/data";
 
 const useClass = create((set) => ({
   classes: [...sinflar],
+  teachers: [...oqituvchilar],
   students: [...talabalar],
   studentInfo: { ...talabalar[0] },
   studentInfoOpen: false,
+  fanlar: [...fanlar],
   currentClass: { ...sinflar[0] },
   addClass: (clas) =>
     set((state) => ({
