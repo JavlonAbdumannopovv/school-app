@@ -1,5 +1,4 @@
 import React from "react";
-import { adminLayout } from "../layouts/admin/admin-layout";
 import {
   Button,
   HStack,
@@ -14,14 +13,15 @@ import {
   TableContainer,
   Link,
 } from "@chakra-ui/react";
-import Header from "../layouts/header/header";
-import { colors } from "../config/colors";
+import Header from "../../layouts/header/header";
+import { colors } from "../../config/colors";
 import { BiPlus } from "react-icons/bi";
 import { useTranslation } from "react-i18next";
 import { TbNumber } from "react-icons/tb";
 import { HiDotsHorizontal } from "react-icons/hi";
-import useClass from "../store/classes.store";
-import { TableFieldClasses } from "../components";
+import useClass from "../../store/classes.store";
+import { TableFieldClasses } from "../../components";
+import { adminLayout } from "../../layouts/admin/admin-layout";
 
 const Classes = () => {
   const { classes } = useClass();
@@ -39,7 +39,7 @@ const Classes = () => {
     <Stack spacing={5}>
       <Header title="sinflar" backIcon={false} />
       <HStack justifyContent={"flex-end"}>
-        <Link href="/sinflar/sinf-qoshish">
+        <Link href="/sinflar/sinf-qoshish:yangi">
           <Button
             colorScheme={colors.colorScheme.dark}
             leftIcon={<BiPlus />}

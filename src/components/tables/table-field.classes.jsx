@@ -43,20 +43,33 @@ const TableFieldClasses = ({ ind, clas }) => {
         cursor={"pointer"}
         _hover={{ background: base }}
         transition={"all .3s ease"}
-        onClick={() => navigate(`/sinflar/sinf-malumotlari:${clas.sinf}`)}
       >
-        <Td>{ind}</Td>
-        <Td>{clas.sinf}-sinf</Td>
-        <Td>{clas.oquvchi_soni}</Td>
-        <Td>{clas.guruh}</Td>
-        <Td>
+        <Td onClick={() => navigate(`/sinflar/sinf-malumotlari/:${clas.id}`)}>
+          {ind}
+        </Td>
+        <Td onClick={() => navigate(`/sinflar/sinf-malumotlari/:${clas.id}`)}>
+          {clas.sinf}-sinf
+        </Td>
+        <Td onClick={() => navigate(`/sinflar/sinf-malumotlari/:${clas.id}`)}>
+          {clas.oquvchilar.length}
+        </Td>
+        <Td onClick={() => navigate(`/sinflar/sinf-malumotlari/:${clas.id}`)}>
+          {clas.guruh}
+        </Td>
+        <Td onClick={() => navigate(`/sinflar/sinf-malumotlari/:${clas.id}`)}>
           <HStack>
             <Avatar src={teacher && teacher.img} w={10} h={10} />
             <Text>{teacher && `${teacher.ism} ${teacher.familiya}`}</Text>
           </HStack>
         </Td>
         <Td>
-          <Actions warning={true} del={true} edit={true} delAction={onOpen} />
+          <Actions
+            warning={true}
+            del={true}
+            edit={true}
+            delAction={onOpen}
+            editAction={`/sinflar/tahrirlash:${clas.id}`}
+          />
         </Td>
       </Tr>
       <ClassDetailedModal

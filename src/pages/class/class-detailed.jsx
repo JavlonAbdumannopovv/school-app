@@ -1,4 +1,3 @@
-import { adminLayout } from "../layouts/admin/admin-layout";
 import {
   Avatar,
   Box,
@@ -19,17 +18,18 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
-import Header from "../layouts/header/header";
+import Header from "../../layouts/header/header";
 import { TbNumber } from "react-icons/tb";
 import { HiDotsHorizontal } from "react-icons/hi";
-import { colors } from "../config/colors";
-import useClass from "../store/classes.store";
+import { colors } from "../../config/colors";
+import useClass from "../../store/classes.store";
 import {
   TableFieldStudents,
   ClassDetailedModal,
   StudentInfo,
-} from "../components";
+} from "../../components";
 import { useNavigate, useParams } from "react-router-dom";
+import { adminLayout } from "../../layouts/admin/admin-layout";
 
 const ClassesDetailed = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -46,11 +46,12 @@ const ClassesDetailed = () => {
   );
 
   const { id } = useParams();
-  const currentClass = classes.find((c) => `sinf-malumotlari:${c.sinf}` === id);
-  const navigate = useNavigate();
-  const avatar = teachers.find(
-    (c) => `${c.ism} ${c.familiya}` === currentClass.sinf_rahbar
+  const currentClass = classes.find((c) => `:${c.id}` === id);
+  const currentStudents = students.filter((c) =>
+    currentClass.oquvchilar.includes(c.id)
   );
+  const navigate = useNavigate();
+  const teacher = teachers.find((c) => c.id === currentClass.sinf_rahbar);
 
   const deleteClass = () => {
     removeClass(currentClass.id);
@@ -73,7 +74,7 @@ const ClassesDetailed = () => {
           <Stack gap={10} pl={10}>
             <Heading>{currentClass.sinf}-sinf</Heading>
             <HStack alignItems={"flex-start"}>
-              <Avatar src={avatar && avatar.img} w={"100px"} h={"100px"} />
+              <Avatar src={teacher && teacher.img} w={"100px"} h={"100px"} />
               <Box mt={2}>
                 <Text fontWeight={"bold"}>{currentClass.sinf_rahbar}</Text>
                 <Text color={"gray"}>Kurator</Text>
@@ -81,7 +82,12 @@ const ClassesDetailed = () => {
             </HStack>
           </Stack>
           <Stack>
-            <Button colorScheme="telegram" borderRadius={"full"} px={10}>
+            <Button
+              colorScheme="telegram"
+              borderRadius={"full"}
+              px={10}
+              onClick={() => navigate(`/sinflar/tahrirlash:${currentClass.id}`)}
+            >
               Tahrirlash
             </Button>
             <Button
@@ -124,7 +130,7 @@ const ClassesDetailed = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {students.map((student, i) => (
+            {currentStudents.map((student, i) => (
               <TableFieldStudents key={i} ind={i + 1} student={student} />
             ))}
           </Tbody>

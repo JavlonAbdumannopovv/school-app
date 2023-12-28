@@ -42,22 +42,52 @@ const TableFieldStudents = ({ ind, student }) => {
         cursor={"pointer"}
         _hover={{ background: base }}
         transition={"all .3s ease"}
-        onClick={() => {
-          setStudentInfo(student.id);
-          studentInfoOpenToggler(true);
-        }}
+        zIndex={999}
       >
-        <Td>{ind}</Td>
-        <Td>
+        <Td
+          onClick={() => {
+            setStudentInfo(student.id);
+            studentInfoOpenToggler(true);
+          }}
+        >
+          {ind}
+        </Td>
+        <Td
+          onClick={() => {
+            setStudentInfo(student.id);
+            studentInfoOpenToggler(true);
+          }}
+        >
           <HStack>
             <Avatar w={10} h={10} src={avatar && avatar.img} />
             <Text>{student.ism}</Text>
             <Text>{student.familiya}</Text>
           </HStack>
         </Td>
-        <Td>{student.telefon}</Td>
-        <Td>{student.hisob_holati}</Td>
-        <Td>{student.grantlar}</Td>
+        <Td
+          onClick={() => {
+            setStudentInfo(student.id);
+            studentInfoOpenToggler(true);
+          }}
+        >
+          {student.telefon}
+        </Td>
+        <Td
+          onClick={() => {
+            setStudentInfo(student.id);
+            studentInfoOpenToggler(true);
+          }}
+        >
+          {student.hisob_holati}
+        </Td>
+        <Td
+          onClick={() => {
+            setStudentInfo(student.id);
+            studentInfoOpenToggler(true);
+          }}
+        >
+          {student.grantlar}
+        </Td>
         <Td>
           <Actions warning={true} del={true} edit={true} delAction={onOpen} />
         </Td>

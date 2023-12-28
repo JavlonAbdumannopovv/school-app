@@ -172,8 +172,8 @@ export const talabalar = [
 ];
 
 class Sinf {
-  constructor(sinf, oquvchi_soni, guruh, sinf_rahbar, tashkil_qilindi) {
-    this.id = `${Math.floor(Math.random() * 900000) + 100}`;
+  constructor(id, sinf, oquvchi_soni, guruh, sinf_rahbar, tashkil_qilindi) {
+    this.id = id;
     this.sinf = sinf;
     this.oquvchi_soni = oquvchi_soni;
     this.guruh = guruh;
@@ -188,14 +188,14 @@ class Sinf {
 }
 
 export const sinflar = [
-  new Sinf('7"A"', 10, "N1", `${oqituvchilar[0].id}`, "2022-09-01"),
-  new Sinf('7"B"', 8, "N2", `${oqituvchilar[1].id}`, "2022-09-01"),
-  new Sinf('8"A"', 30, "N1", `${oqituvchilar[2].id}`, "2022-09-01"),
-  new Sinf('8"B"', 25, "N2", `${oqituvchilar[3].id}`, "2022-09-01"),
-  new Sinf('8"V"', 28, "N1", `${oqituvchilar[4].id}`, "2022-09-01"),
-  new Sinf('8"D"', 22, "N2", `${oqituvchilar[5].id}`, "2022-09-01"),
-  new Sinf('9"A"', 20, "N1", `${oqituvchilar[6].id}`, "2022-09-01"),
-  new Sinf('9"B"', 18, "N2", `${oqituvchilar[7].id}`, "2022-09-01"),
-  new Sinf('9"V"', 15, "N1", `${oqituvchilar[8].id}`, "2022-09-01"),
-  new Sinf('9"D"', 12, "N2", `${oqituvchilar[9].id}`, "2022-09-01"),
+  new Sinf("213756", '7"A"', 10, "N1", `${oqituvchilar[0].id}`, "2022-09-01"),
+  new Sinf("929257", '7"B"', 8, "N2", `${oqituvchilar[1].id}`, "2022-09-01"),
+  new Sinf("838358", '8"A"', 30, "N1", `${oqituvchilar[2].id}`, "2022-09-01"),
+  new Sinf("747459", '8"B"', 25, "N2", `${oqituvchilar[3].id}`, "2022-09-01"),
+  new Sinf("656516", '8"V"', 28, "N1", `${oqituvchilar[4].id}`, "2022-09-01"),
+  new Sinf("565626", '8"D"', 22, "N2", `${oqituvchilar[5].id}`, "2022-09-01"),
+  new Sinf("474736", '9"A"', 20, "N1", `${oqituvchilar[6].id}`, "2022-09-01"),
+  new Sinf("383846", '9"B"', 18, "N2", `${oqituvchilar[7].id}`, "2022-09-01"),
+  new Sinf("292976", '9"V"', 15, "N1", `${oqituvchilar[8].id}`, "2022-09-01"),
+  new Sinf("125186", '9"D"', 12, "N2", `${oqituvchilar[9].id}`, "2022-09-01"),
 ];

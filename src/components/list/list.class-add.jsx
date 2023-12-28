@@ -20,6 +20,7 @@ import { IoSearch } from "react-icons/io5";
 import useClass from "../../store/classes.store";
 
 const ListClassAdd = ({ isStudent, addedClass, setAddedClass }) => {
+  console.log(addedClass);
   const [deletedStudents, setDeletedStudents] = useState([]);
   const [deletedFanlar, setDeletedFanlar] = useState([]);
   const { students, fanlar } = useClass();

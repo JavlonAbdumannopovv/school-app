@@ -17,6 +17,13 @@ const useClass = create((set) => ({
     set((state) => ({
       classes: state.classes.filter((clas) => clas.id !== classId),
     })),
+  editClass: (editClass) =>
+    set((state) => ({
+      classes: [
+        ...state.classes.filter((c) => c.id !== editClass.id),
+        editClass,
+      ],
+    })),
   removeStudent: (studentId) =>
     set((state) => ({
       students: state.students.filter((student) => student.id !== studentId),

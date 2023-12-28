@@ -27,29 +27,30 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
-import { adminLayout } from "../layouts/admin/admin-layout";
-import Header from "../layouts/header/header";
-import { colors } from "../config/colors";
+import { adminLayout } from "../../layouts/admin/admin-layout";
+import Header from "../../layouts/header/header";
+import { colors } from "../../config/colors";
 import { FaAngleDown } from "react-icons/fa6";
 import { IoSearch } from "react-icons/io5";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
-import { fanlar, oqituvchilar } from "../config/data";
-import useClass from "../store/classes.store";
+import { fanlar, oqituvchilar } from "../../config/data";
+import useClass from "../../store/classes.store";
 import { PiPlus } from "react-icons/pi";
-import ListClassAdd from "../components/list/list.class-add";
-import { useNavigate } from "react-router-dom";
+import ListClassAdd from "../../components/list/list.class-add";
+import { useNavigate, useParams } from "react-router-dom";
+import shortid from "shortid";
 
 const currentDate = new Date();
 
 const day = currentDate.getDate();
-const month = currentDate.getMonth() + 1; // Note: Months are zero-based, so we add 1
+const month = currentDate.getMonth() + 1;
 const year = currentDate.getFullYear();
 
 const formattedDate = `${day}.${month}.${year}`;
-
+const uniqueId = shortid();
 const initialState = {
-  id: `${Math.floor(Math.random() * 900000) + 100}`,
+  id: uniqueId,
   tashkil_qilindi: formattedDate,
   sinf: "",
   oquvchi_soni: 0,
@@ -61,8 +62,15 @@ const initialState = {
 };
 
 const ClassAdd = () => {
-  const { students, addClass } = useClass();
-  const [addedClass, setAddedClass] = useState(initialState);
+  const { students, addClass, classes, editClass } = useClass();
+  const { id } = useParams();
+  const isEdit = id === `sinf-qoshish:yangi` ? false : true;
+  const editedClass = isEdit
+    ? classes.find((c) => `tahrirlash:${c.id}` === id)
+    : [];
+  const [addedClass, setAddedClass] = useState(
+    isEdit ? editedClass : initialState
+  );
   const secondary = useColorModeValue(
     colors.secondary.light,
     colors.secondary.dark
@@ -77,7 +85,6 @@ const ClassAdd = () => {
     fanId: "",
     oqituvchiId: "",
   });
-  console.log(addedClass);
   const toast = useToast();
   const navigate = useNavigate();
 
@@ -158,45 +165,96 @@ const ClassAdd = () => {
                 }}
               />
             </Stack>
-            <HStack justifyContent={"space-between"} gap={10}>
-              <Button
-                w={"full"}
-                h={14}
-                colorScheme={colorScheme}
-                variant={"outline"}
-                borderRadius={"lg"}
-              >
-                Bekor qilish
-              </Button>
-              <Button
-                w={"full"}
-                h={14}
-                colorScheme={colorScheme}
-                borderRadius={"lg"}
-                isDisabled={
-                  !(
-                    addedClass.sinf !== "" &&
-                    addedClass.sinf_rahbar !== "" &&
-                    addedClass.fanlar.length !== 0 &&
-                    addedClass.oquvchilar.length !== 0 &&
-                    addedClass.xona !== ""
-                  )
-                }
-                onClick={() => {
-                  addClass(addedClass);
-                  navigate("/sinflar/");
-                  toast({
-                    title: `${addedClass.sinf}-sinf muvaffaqqiyatli qo'shildi`,
-                    status: "info",
-                    duration: 9000,
-                    isClosable: true,
-                    position: "top-right",
-                  });
-                }}
-              >
-                Saqlash
-              </Button>
-            </HStack>
+            {isEdit ? (
+              <HStack justifyContent={"space-between"} gap={10}>
+                <Button
+                  w={"full"}
+                  h={14}
+                  colorScheme={colorScheme}
+                  variant={"outline"}
+                  borderRadius={"lg"}
+                  onClick={() => setAddedClass(editedClass)}
+                >
+                  Bekor qilish
+                </Button>
+                <Button
+                  w={"full"}
+                  h={14}
+                  colorScheme={colorScheme}
+                  borderRadius={"lg"}
+                  isDisabled={
+                    !(
+                      (addedClass.sinf !== "" &&
+                        addedClass.sinf !== editedClass.sinf) ||
+                      (addedClass.sinf_rahbar !== "" &&
+                        addedClass.sinf_rahbar !== editedClass.sinf_rahbar) ||
+                      (addedClass.fanlar.length !== 0 &&
+                        addedClass.fanlar.length !==
+                          editedClass.fanlar.length) ||
+                      (addedClass.oquvchilar.length !== 0 &&
+                        addedClass.oquvchilar.length !==
+                          editedClass.oquvchilar.length) ||
+                      (addedClass.xona !== 0 &&
+                        addedClass.xona !== editedClass.xona)
+                    )
+                  }
+                  onClick={() => {
+                    editClass(addedClass);
+                    navigate("/sinflar");
+                    toast({
+                      title: `Sinf muvaffaqqiyatli tahrirlandi!`,
+                      status: "info",
+                      duration: 9000,
+                      isClosable: true,
+                      position: "top-right",
+                    });
+                  }}
+                >
+                  Saqlash
+                </Button>
+              </HStack>
+            ) : (
+              <HStack justifyContent={"space-between"} gap={10}>
+                <Button
+                  w={"full"}
+                  h={14}
+                  colorScheme={colorScheme}
+                  variant={"outline"}
+                  borderRadius={"lg"}
+                  onClick={() => setAddedClass(initialState)}
+                >
+                  Bekor qilish
+                </Button>
+                <Button
+                  w={"full"}
+                  h={14}
+                  colorScheme={colorScheme}
+                  borderRadius={"lg"}
+                  isDisabled={
+                    !(
+                      addedClass.sinf !== "" &&
+                      addedClass.sinf_rahbar !== "" &&
+                      addedClass.fanlar.length !== 0 &&
+                      addedClass.oquvchilar.length !== 0 &&
+                      addedClass.xona !== ""
+                    )
+                  }
+                  onClick={() => {
+                    addClass(addedClass);
+                    navigate("/sinflar/");
+                    toast({
+                      title: `${addedClass.sinf}-sinf muvaffaqqiyatli qo'shildi`,
+                      status: "info",
+                      duration: 9000,
+                      isClosable: true,
+                      position: "top-right",
+                    });
+                  }}
+                >
+                  Saqlash
+                </Button>
+              </HStack>
+            )}
           </Grid>
           <Divider />
           <HStack mt={10} gap={10} alignItems={"flex-start"}>
