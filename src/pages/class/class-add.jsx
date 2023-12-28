@@ -87,10 +87,11 @@ const ClassAdd = () => {
   });
   const toast = useToast();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <Stack spacing={5}>
-      <Header title={"Sinf qo`shish"} />
+      <Header title={t("sinf_qoshish")} />
       <Card bg={secondary} borderRadius={"xl"} boxShadow={"2xl"} pb={120}>
         <CardBody>
           <Grid
@@ -105,10 +106,10 @@ const ClassAdd = () => {
             p={10}
           >
             <Stack>
-              <Text color={`${colorScheme}.500`}>Sinf</Text>
+              <Text color={`${colorScheme}.500`}>{t("big_sinf")}</Text>
               <Input
                 type="text"
-                placeholder='Sinf nomi - 1"A"'
+                placeholder={`${t("sinf_nomi")} - 1"A"`}
                 borderColor={"gray"}
                 borderRadius={"lg"}
                 h={14}
@@ -121,7 +122,7 @@ const ClassAdd = () => {
               />
             </Stack>
             <Stack>
-              <Text color={`${colorScheme}.500`}>Kurator</Text>
+              <Text color={`${colorScheme}.500`}>{t("kurator")}</Text>
               <MenuComponent
                 item={oqituvchilar}
                 type={"teacher"}
@@ -130,7 +131,7 @@ const ClassAdd = () => {
               />
             </Stack>
             <Stack>
-              <Text color={`${colorScheme}.500`}>Fanlar</Text>
+              <Text color={`${colorScheme}.500`}>{t("fanlar")}</Text>
               <Button
                 colorScheme="gray"
                 borderRadius={"lg"}
@@ -139,11 +140,11 @@ const ClassAdd = () => {
                 h={14}
                 onClick={onOpen}
               >
-                Fan qo`shish
+                {t("fan_qoshish")}
               </Button>
             </Stack>
             <Stack>
-              <Text color={`${colorScheme}.500`}>O`quvchilar</Text>
+              <Text color={`${colorScheme}.500`}>{t("oquvchilar")}</Text>
               <MenuComponent
                 item={students}
                 type={"student"}
@@ -152,10 +153,10 @@ const ClassAdd = () => {
               />
             </Stack>
             <Stack>
-              <Text color={`${colorScheme}.500`}>Xona raqami</Text>
+              <Text color={`${colorScheme}.500`}>{t("xona_raqami")}</Text>
               <Input
                 type="number"
-                placeholder="Xona raqamini kiriting"
+                placeholder={`${t("xona_raqamini_kiriting")}`}
                 borderColor={"gray"}
                 borderRadius={"lg"}
                 value={addedClass.xona}
@@ -175,7 +176,7 @@ const ClassAdd = () => {
                   borderRadius={"lg"}
                   onClick={() => setAddedClass(editedClass)}
                 >
-                  Bekor qilish
+                  {t("bekor_qilish")}
                 </Button>
                 <Button
                   w={"full"}
@@ -202,7 +203,7 @@ const ClassAdd = () => {
                     editClass(addedClass);
                     navigate("/sinflar");
                     toast({
-                      title: `Sinf muvaffaqqiyatli tahrirlandi!`,
+                      title: `${t("toast_edit_class")}`,
                       status: "info",
                       duration: 9000,
                       isClosable: true,
@@ -210,7 +211,7 @@ const ClassAdd = () => {
                     });
                   }}
                 >
-                  Saqlash
+                  {t("saqlash")}
                 </Button>
               </HStack>
             ) : (
@@ -223,7 +224,7 @@ const ClassAdd = () => {
                   borderRadius={"lg"}
                   onClick={() => setAddedClass(initialState)}
                 >
-                  Bekor qilish
+                  {t("bekor_qilish")}
                 </Button>
                 <Button
                   w={"full"}
@@ -243,7 +244,7 @@ const ClassAdd = () => {
                     addClass(addedClass);
                     navigate("/sinflar/");
                     toast({
-                      title: `${addedClass.sinf}-sinf muvaffaqqiyatli qo'shildi`,
+                      title: `${addedClass.sinf}-${t("toast_add_class")}`,
                       status: "info",
                       duration: 9000,
                       isClosable: true,
@@ -251,7 +252,7 @@ const ClassAdd = () => {
                     });
                   }}
                 >
-                  Saqlash
+                  {t("saqlash")}
                 </Button>
               </HStack>
             )}
@@ -280,13 +281,13 @@ const ClassAdd = () => {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Fan qo`shish</ModalHeader>
+          <ModalHeader>{t("fan_qoshish")}</ModalHeader>
           <Divider />
           <ModalCloseButton />
           <ModalBody px={20} py={10}>
             <Stack>
               <Stack>
-                <Text color={`${colorScheme}.500`}>Fan nomi</Text>
+                <Text color={`${colorScheme}.500`}>{t("fan_nomi")}</Text>
                 <MenuComponent
                   item={fanlar}
                   type={"fan"}
@@ -296,7 +297,7 @@ const ClassAdd = () => {
                 />
               </Stack>
               <Stack>
-                <Text color={`${colorScheme}.500`}>Fan o`qituvchisi</Text>
+                <Text color={`${colorScheme}.500`}>{t("fan_oqituvchisi")}</Text>
                 <MenuComponent
                   item={oqituvchilar}
                   type={"fan-teacher"}
@@ -316,7 +317,7 @@ const ClassAdd = () => {
                 variant={"outline"}
                 onClick={onClose}
               >
-                Yopish
+                {t("yopish")}
               </Button>
               <Button
                 w={"full"}
@@ -340,7 +341,7 @@ const ClassAdd = () => {
                   setFan({ fanId: "", oqituvchiId: "" });
                 }}
               >
-                Saqlash
+                {t("saqlash")}
               </Button>
             </HStack>
           </ModalFooter>
@@ -409,10 +410,10 @@ export const MenuComponent = ({
         variant={"outline"}
         colorScheme={"gray"}
       >
-        {type === "teacher" && "O`qituvchini tanlang"}
-        {type === "student" && "O`quvchilarni tanlang"}
-        {type === "fan" && "Fan nomini tanlang"}
-        {type === "fan-teacher" && "Fan oqituvchisini tanlang"}
+        {type === "teacher" && t("oqituvchini_tanlang")}
+        {type === "student" && t("oquvchilarni_tanlang")}
+        {type === "fan" && t("fan_nomini_tanlang")}
+        {type === "fan-teacher" && t("fan_oqituvchisini_tanlang")}
       </MenuButton>
       <MenuList
         bg={secondary}
@@ -426,7 +427,7 @@ export const MenuComponent = ({
           <Input
             fontSize={15}
             type="search"
-            placeholder={t("qidirish")}
+            placeholder={t("qidirish") + "..."}
             bg={"transparent"}
             border={"none"}
             focusBorderColor="transparent"

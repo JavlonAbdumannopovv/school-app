@@ -24,6 +24,7 @@ import UzbIcons from "../../icons/uzb";
 import { useTranslation } from "react-i18next";
 import EngIcons from "../../icons/eng";
 import RusIcon from "../../icons/rus";
+import { useNavigate } from "react-router-dom";
 
 const Header = ({ title, backIcon = true }) => {
   const base = useColorModeValue(colors.base.light, colors.base.dark);
@@ -32,6 +33,7 @@ const Header = ({ title, backIcon = true }) => {
     colors.secondary.dark
   );
   const { toggleColorMode, colorMode } = useColorMode();
+  const navigate = useNavigate();
 
   const { i18n, t } = useTranslation();
 
@@ -50,7 +52,16 @@ const Header = ({ title, backIcon = true }) => {
       justifyContent={"space-between"}
       boxShadow={"lg"}
     >
-      <HStack cursor={"pointer"}>
+      <HStack
+        cursor={"pointer"}
+        onClick={
+          backIcon
+            ? () => navigate(-1)
+            : () => {
+                "";
+              }
+        }
+      >
         {backIcon && <Icon as={IoChevronBackSharp} />}
         <Text>{t(title)}</Text>
       </HStack>

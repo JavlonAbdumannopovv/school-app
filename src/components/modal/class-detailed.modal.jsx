@@ -8,8 +8,10 @@ import {
   Button,
 } from "@chakra-ui/react";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const ClassDetailedModal = ({ title, isOpen, onClose, btnAction }) => {
+  const { t } = useTranslation();
   return (
     <Modal
       isOpen={isOpen}
@@ -28,10 +30,10 @@ const ClassDetailedModal = ({ title, isOpen, onClose, btnAction }) => {
 
         <ModalFooter justifyContent={"center"}>
           <Button colorScheme="blue" mr={3} variant="outline" onClick={onClose}>
-            Yo`q
+            {t("yoq")}
           </Button>
           <Button colorScheme="blue" px={5} onClick={btnAction}>
-            Ha
+            {t("ha")}
           </Button>
         </ModalFooter>
       </ModalContent>

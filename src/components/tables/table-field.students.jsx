@@ -12,6 +12,7 @@ import Actions from "../actions/actions";
 import { colors } from "../../config/colors";
 import ClassDetailedModal from "../modal/class-detailed.modal";
 import useClass from "../../store/classes.store";
+import { useTranslation } from "react-i18next";
 
 const TableFieldStudents = ({ ind, student }) => {
   const base = useColorModeValue(colors.base.light, colors.base.dark);
@@ -19,12 +20,15 @@ const TableFieldStudents = ({ ind, student }) => {
   const { removeStudent, students, setStudentInfo, studentInfoOpenToggler } =
     useClass();
   const toast = useToast();
+  const { t } = useTranslation();
 
   const deleteStudent = () => {
     removeStudent(student.id);
     onClose();
     toast({
-      title: `${student.ism} ${student.familiya}, ${student.sinf} dan muvaffaqqiyatli o'chirildi!`,
+      title: `${student.ism} ${student.familiya}, ${student.sinf} ${t(
+        "student_del"
+      )}`,
       status: "info",
       duration: 9000,
       isClosable: true,
@@ -93,7 +97,9 @@ const TableFieldStudents = ({ ind, student }) => {
         </Td>
       </Tr>
       <ClassDetailedModal
-        title={`${student.ism} ${student.familiya}, ${student.sinf} dan o'chirilishiga rozimisiz?`}
+        title={`${student.ism} ${student.familiya}, ${student.sinf} ${t(
+          "student_del"
+        )}`}
         isOpen={isOpen}
         onClose={onClose}
         btnAction={deleteStudent}

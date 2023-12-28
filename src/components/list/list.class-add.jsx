@@ -20,7 +20,6 @@ import { IoSearch } from "react-icons/io5";
 import useClass from "../../store/classes.store";
 
 const ListClassAdd = ({ isStudent, addedClass, setAddedClass }) => {
-  console.log(addedClass);
   const [deletedStudents, setDeletedStudents] = useState([]);
   const [deletedFanlar, setDeletedFanlar] = useState([]);
   const { students, fanlar } = useClass();
@@ -84,8 +83,8 @@ const ListClassAdd = ({ isStudent, addedClass, setAddedClass }) => {
         <HStack justifyContent={"space-between"}>
           <Text fontSize={15}>
             {isStudent &&
-              `${addedClass.oquvchilar.length} nafar o'quvchilar ro'yxati`}
-            {!isStudent && "Fanlar ro'yxati"}
+              `${addedClass.oquvchilar.length} ${t("list_students")}`}
+            {!isStudent && t("list_fanlar")}
           </Text>
           {isStudent ? (
             <IconButton
@@ -141,7 +140,7 @@ const ListClassAdd = ({ isStudent, addedClass, setAddedClass }) => {
           <Input
             fontSize={15}
             type="search"
-            placeholder={t("qidirish")}
+            placeholder={t("qidirish") + "..."}
             bg={"transparent"}
             border={"none"}
             focusBorderColor="transparent"

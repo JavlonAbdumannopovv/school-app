@@ -89,7 +89,7 @@ const AdminSidebar = () => {
             _hover={{ color: "blue.500" }}
           >
             <Icon as={FiLogOut} />
-            <Text>Chiqish</Text>
+            <Text>{t("chiqish")}</Text>
           </HStack>
         </Link>
       </Stack>

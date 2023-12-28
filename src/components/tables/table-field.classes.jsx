@@ -13,6 +13,7 @@ import { colors } from "../../config/colors";
 import ClassDetailedModal from "../modal/class-detailed.modal";
 import useClass from "../../store/classes.store";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const TableFieldClasses = ({ ind, clas }) => {
   const base = useColorModeValue(colors.base.light, colors.base.dark);
@@ -22,11 +23,13 @@ const TableFieldClasses = ({ ind, clas }) => {
   const navigate = useNavigate();
   const teacher = teachers.find((c) => `${c.id}` === clas.sinf_rahbar);
 
+  const { t } = useTranslation();
+
   const deleteStudent = () => {
     removeClass(clas.id);
     onClose();
     toast({
-      title: `${clas.sinf} serverdan muvaffaqqiyatli o'chirildi!`,
+      title: `${clas.sinf} ${t("modal_class_toast")}`,
       status: "info",
       duration: 9000,
       isClosable: true,
@@ -34,7 +37,6 @@ const TableFieldClasses = ({ ind, clas }) => {
     });
   };
 
-  console.log(teacher);
   return (
     <>
       <Tr
@@ -48,7 +50,7 @@ const TableFieldClasses = ({ ind, clas }) => {
           {ind}
         </Td>
         <Td onClick={() => navigate(`/sinflar/sinf-malumotlari/:${clas.id}`)}>
-          {clas.sinf}-sinf
+          {clas.sinf}-{t("sinf")}
         </Td>
         <Td onClick={() => navigate(`/sinflar/sinf-malumotlari/:${clas.id}`)}>
           {clas.oquvchilar.length}
@@ -73,7 +75,7 @@ const TableFieldClasses = ({ ind, clas }) => {
         </Td>
       </Tr>
       <ClassDetailedModal
-        title={`${clas.sinf} serverdan o'chirilishiga rozimisiz?`}
+        title={`${clas.sinf} ${t("modal_class_title")}`}
         isOpen={isOpen}
         onClose={onClose}
         btnAction={deleteStudent}

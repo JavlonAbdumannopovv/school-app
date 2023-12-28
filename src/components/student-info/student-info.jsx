@@ -15,6 +15,7 @@ import { MdOutlineEmail } from "react-icons/md";
 import { colors } from "../../config/colors";
 import BoxTitle from "../box-title/box-title";
 import useClass from "../../store/classes.store";
+import { useTranslation } from "react-i18next";
 
 const StudentInfo = () => {
   const { studentInfo, studentInfoOpenToggler, studentInfoOpen } = useClass();
@@ -26,6 +27,7 @@ const StudentInfo = () => {
     colors.colorScheme.light,
     colors.colorScheme.dark
   );
+  const { t } = useTranslation();
   const gray = useColorModeValue(colors.border.dark, colors.border.light);
   return (
     <Stack
@@ -59,7 +61,9 @@ const StudentInfo = () => {
       <Heading color={`${colorScheme}.500`}>
         {studentInfo.ism} {studentInfo.familiya}
       </Heading>
-      <Text color={"gray"}>ID: {studentInfo.id}</Text>
+      <Text color={"gray"}>
+        {t("id")}: {studentInfo.id}
+      </Text>
       <HStack w={"full"} justifyContent={"space-between"}>
         <HStack overflowX={"hidden"} w={"50%"}>
           <IconButton
@@ -85,18 +89,18 @@ const StudentInfo = () => {
         </HStack>
       </HStack>
       <Divider />
-      <BoxTitle title={"About"} subtitle={studentInfo.about} />
+      <BoxTitle title={t("haqida")} subtitle={studentInfo.about} />
       <Grid gridTemplateColumns={"repeat(2, 1fr)"} gap={2} rowGap={5}>
         <BoxTitle
-          title={"Tug`ilgan sana"}
+          title={t("tugilgan_sana")}
           subtitle={studentInfo.tugilgan_sana}
         />
-        <BoxTitle title={"Username"} subtitle={studentInfo.username} />
-        <BoxTitle title={"Jinsi"} subtitle={studentInfo.gender} />
-        <BoxTitle title={"Parol"} subtitle={studentInfo.parol} />
-        <BoxTitle title={"Manzil"} subtitle={studentInfo.manzil} />
+        <BoxTitle title={t("username")} subtitle={studentInfo.username} />
+        <BoxTitle title={t("jinsi")} subtitle={studentInfo.gender} />
+        <BoxTitle title={t("parol")} subtitle={studentInfo.parol} />
+        <BoxTitle title={t("manzil")} subtitle={studentInfo.manzil} />
         <BoxTitle
-          title={"O`qish summasi"}
+          title={t("oqish_summasi")}
           subtitle={`UZS ${studentInfo.hisob_holati}`}
         />
       </Grid>

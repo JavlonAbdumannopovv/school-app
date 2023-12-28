@@ -30,8 +30,10 @@ import {
 } from "../../components";
 import { useNavigate, useParams } from "react-router-dom";
 import { adminLayout } from "../../layouts/admin/admin-layout";
+import { useTranslation } from "react-i18next";
 
 const ClassesDetailed = () => {
+  const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { students, removeClass, classes, teachers } = useClass();
   const toast = useToast();
@@ -58,7 +60,7 @@ const ClassesDetailed = () => {
     navigate("/sinflar/");
     onClose();
     toast({
-      title: `${currentClass.sinf}-sinf muvaffaqqiyatli o'chirildi`,
+      title: `${currentClass.sinf} ${t("ochirish_title")}`,
       status: "info",
       duration: 9000,
       isClosable: true,
@@ -68,16 +70,18 @@ const ClassesDetailed = () => {
 
   return (
     <Stack spacing={5}>
-      <Header title="sinf_malumotlari" />
+      <Header title={t("sinf_malumotlari")} />
       <Stack gap={5}>
         <HStack alignItems={"flex-start"} justifyContent={"space-between"}>
           <Stack gap={10} pl={10}>
-            <Heading>{currentClass.sinf}-sinf</Heading>
+            <Heading>
+              {currentClass.sinf}-{t("sinf")}
+            </Heading>
             <HStack alignItems={"flex-start"}>
               <Avatar src={teacher && teacher.img} w={"100px"} h={"100px"} />
               <Box mt={2}>
                 <Text fontWeight={"bold"}>{currentClass.sinf_rahbar}</Text>
-                <Text color={"gray"}>Kurator</Text>
+                <Text color={"gray"}>{t("kurator")}</Text>
               </Box>
             </HStack>
           </Stack>
@@ -88,7 +92,7 @@ const ClassesDetailed = () => {
               px={10}
               onClick={() => navigate(`/sinflar/tahrirlash:${currentClass.id}`)}
             >
-              Tahrirlash
+              {t("tahrirlash")}
             </Button>
             <Button
               colorScheme="red"
@@ -97,18 +101,18 @@ const ClassesDetailed = () => {
               px={10}
               onClick={onOpen}
             >
-              O`chirish
+              {t("ochirish")}
             </Button>
           </Stack>
         </HStack>
         <Divider />
         <Stack pl={10}>
           <HStack>
-            <Text fontWeight={"bold"}>Tashkil qilindi: </Text>
+            <Text fontWeight={"bold"}>{t("tashkil_qilindi")}: </Text>
             <Text>{currentClass.tashkil_qilindi}</Text>
           </HStack>
           <HStack>
-            <Text fontWeight={"bold"}>Jami o`quvchi: </Text>
+            <Text fontWeight={"bold"}>{t("jami_oquvchi")}: </Text>
             <Text>{currentClass.oquvchi_soni}</Text>
           </HStack>
         </Stack>
@@ -120,10 +124,10 @@ const ClassesDetailed = () => {
               <Th>
                 <Icon as={TbNumber} fontSize={20} />
               </Th>
-              <Th>F.I.SH</Th>
-              <Th>Telefon Nomer</Th>
-              <Th>Hisob holati</Th>
-              <Th>O`quvchi grantlari</Th>
+              <Th>{t("fish")}</Th>
+              <Th>{t("telefon_nomer")}</Th>
+              <Th>{t("hisob_holati")}</Th>
+              <Th>{t("oquvchi_grantlari")}</Th>
               <Th>
                 <Icon as={HiDotsHorizontal} fontSize={20} />
               </Th>
@@ -137,7 +141,7 @@ const ClassesDetailed = () => {
         </Table>
       </TableContainer>
       <ClassDetailedModal
-        title={"Sinf o`chirilishiga rozimisiz?"}
+        title={t("class_del")}
         isOpen={isOpen}
         onClose={onClose}
         btnAction={deleteClass}
