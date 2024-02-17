@@ -5,9 +5,9 @@ import { LuBookCopy } from "react-icons/lu";
 import { IoCalendarOutline } from "react-icons/io5";
 import { FaRegFileLines } from "react-icons/fa6";
 import { TbReportAnalytics } from "react-icons/tb";
-import EngIcons from "../icons/eng";
-import RusIcons from "../icons/rus";
-import UzbIcons from "../icons/uzb";
+import EngIcons from "../assets/icons/eng";
+import RusIcons from "../assets/icons/rus";
+import UzbIcons from "../assets/icons/uzb";
 
 export const adminNavigation = [
   {

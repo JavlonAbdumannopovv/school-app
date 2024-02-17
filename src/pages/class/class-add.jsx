@@ -71,6 +71,7 @@ const ClassAdd = () => {
   const [addedClass, setAddedClass] = useState(
     isEdit ? editedClass : initialState
   );
+  console.log(students);
   const secondary = useColorModeValue(
     colors.secondary.light,
     colors.secondary.dark

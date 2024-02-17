@@ -32,6 +32,8 @@ const ListClassAdd = ({ isStudent, addedClass, setAddedClass }) => {
     return fanlar.find((c) => c.id === item.fanId);
   });
 
+  const oquvchilar = [...addedClass.oquvchilar];
+
   const currentItem = isStudent
     ? addedClass.oquvchilar.map((item) => {
         return students.find((c) => c.id === item);

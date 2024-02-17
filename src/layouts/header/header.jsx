@@ -20,10 +20,10 @@ import { IoSearch } from "react-icons/io5";
 import { language } from "../../config/constants";
 import { BsFillMoonFill, BsFillSunFill } from "react-icons/bs";
 import { BiChevronDown } from "react-icons/bi";
-import UzbIcons from "../../icons/uzb";
+import UzbIcons from "../../assets/icons/uzb";
 import { useTranslation } from "react-i18next";
-import EngIcons from "../../icons/eng";
-import RusIcon from "../../icons/rus";
+import EngIcons from "../../assets/icons/eng";
+import RusIcon from "../../assets/icons/rus";
 import { useNavigate } from "react-router-dom";
 
 const Header = ({ title, backIcon = true }) => {

@@ -80,7 +80,7 @@ const ClassesDetailed = () => {
             <HStack alignItems={"flex-start"}>
               <Avatar src={teacher && teacher.img} w={"100px"} h={"100px"} />
               <Box mt={2}>
-                <Text fontWeight={"bold"}>{currentClass.sinf_rahbar}</Text>
+                <Text fontWeight={"bold"}>{`${teacher.ism} ${teacher.familiya}`}</Text>
                 <Text color={"gray"}>{t("kurator")}</Text>
               </Box>
             </HStack>
